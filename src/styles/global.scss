@@ -1,0 +1,32 @@
+* {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+a {
+  text-decoration: none;
+}
+
+.root {
+  display: grid;
+  min-height: 100vh;
+}
+
+* {
+  $scrollbar-width: 12px;
+  scrollbar-color: var(--line-color);
+
+  scrollbar-width: $scrollbar-width;
+
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    width: $scrollbar-width;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border: 2px solid transparent;
+    border-radius: calc($scrollbar-width / 2);
+    background-clip: padding-box;
+    background-color: var(--line-color);
+  }
+}
