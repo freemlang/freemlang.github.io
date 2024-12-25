@@ -1,6 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
 * {
   background-color: var(--background-color);
-  color: var(--text-color);
+  color: var(--primary-text-color);
+  font-family: "Outfit";
 }
 
 a {

@@ -1,83 +1,115 @@
 <script lang="ts">
-  import FreemMark from "@/components/FreemMark.svelte";
-  import GithubMark from "@/components/GithubMark.svelte";
+  import ThemedFreemMark from "@/components/ThemedFreemMark.svelte";
+  import ThemedGithubMark from "@/components/ThemedGithubMark.svelte";
   import { config } from "@/lib/config";
-  import { globalTheme } from "@/lib/theme.svelte.ts";
-
-  interface Props {
-    page: "home" | "docs";
-  }
-
-  const { page }: Props = $props();
+  import { Link } from "svelte-routing";
 </script>
 
 <header>
   <section class="combination-mark">
-    <div class="symbol-mark">
-      <FreemMark />
-    </div>
-    <span class="word-mark">
-      Freem
-      <sup class="language-version">
+    <Link class="home-anchor" to="/">
+      <ThemedFreemMark class="freem-mark" />
+    </Link>
+    <span class="language-version">
+      <sup>
         <a href={config.languageRepositoryUrl} target="_blank">{config.languageVersion}</a>
       </sup>
     </span>
   </section>
-  <nav>
-    <a class="github-link" href={config.organizationUrl} target="_blank">
-      <GithubMark color={globalTheme.current.githubMarkColor} />
-    </a>
-  </nav>
+  <section class="menu">
+    <nav class="internal-link-nav">
+      <Link to="/docs">Docs</Link>
+    </nav>
+    <nav class="external-link-nav">
+      <a class="github-link" href={config.organizationUrl} target="_blank">
+        <ThemedGithubMark />
+      </a>
+    </nav>
+  </section>
 </header>
 
 <style lang="scss">
   header {
-    padding: 20px 40px;
-    height: 40px;
+    padding: 0 40px;
+    height: max-content;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--line-color);
-
-    & > nav {
-      height: 100%;
-      display: flex;
-      gap: 1em;
-      width: max-content;
-    }
   }
 
   .combination-mark {
     height: 100%;
     display: flex;
+    gap: 0.2em;
     align-items: center;
-    gap: 0.5em;
-    cursor: default;
-  }
-
-  .symbol-mark {
-    --height: 100%;
-    height: 100%;
-    display: inline-block;
-  }
-
-  @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
-
-  .word-mark {
-    display: inline-block;
-    font-family: "Outfit";
     font-display: block;
-    font-size: 2em;
-    font-weight: 400;
+
+    & > :global(.home-anchor) {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      height: 100%;
+
+      & > :global(.freem-mark) {
+        height: 40px;
+      }
+    }
   }
 
   .language-version {
-    vertical-align: super;
-    font-size: 0.5em;
+    font-family: "Outfit";
+    font-size: 2em;
 
-    & > a:not(:hover) {
-      color: var(--secondary-text-color);
+    & > sup {
+      vertical-align: super;
+      font-size: 0.5em;
+
+      & > a:not(:hover) {
+        color: var(--secondary-text-color);
+      }
     }
+  }
+
+  .menu {
+    height: 100%;
+    display: flex;
+    gap: 3em;
+  }
+
+  .internal-link-nav {
+    display: flex;
+    height: 100%;
+    gap: 1em;
+
+    & > :global(a) {
+      padding: 0 1em;
+      width: max-content;
+      align-content: center;
+      position: relative;
+      font-size: 1.1em;
+
+      &:not(:hover) {
+        color: var(--secondary-text-color);
+      }
+
+      &:hover::after {
+        position: absolute;
+        content: "";
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: var(--primary-text-color);
+      }
+    }
+  }
+
+  .external-link-nav {
+    height: 100%;
+    display: flex;
+    gap: 1em;
+    width: max-content;
   }
 
   .github-link {

@@ -1,31 +1,25 @@
 <script lang="ts">
-  import githubMarkBlack from "@/assets/github-mark-black.svg";
-  import githubMarkWhite from "@/assets/github-mark-white.svg";
+  import darkGithubMark from "@/assets/github-mark-dark.svg";
+  import lightGithubMark from "@/assets/github-mark-light.svg";
+  import type { HTMLAttributes } from "svelte/elements";
 
-  interface Props {
-    color: "white" | "black";
+  interface Props extends Omit<HTMLAttributes<HTMLImageElement>, "src" | "alt"> {
+    theme: "light" | "dark";
   }
 
-  const { color }: Props = $props();
+  const { theme, ...props }: Props = $props();
 
   const githubMark = $derived(
     (() => {
-      switch (color) {
-        case "white":
-          return githubMarkWhite;
-        case "black":
-          return githubMarkBlack;
+      switch (theme) {
+        case "light":
+          return lightGithubMark;
+        case "dark":
+          return darkGithubMark;
       }
-      color satisfies never;
+      theme satisfies never;
     })(),
   );
 </script>
 
-<img src={githubMark} alt="Github Mark" />
-
-<style lang="scss">
-  img {
-    width: var(--width);
-    height: var(--height);
-  }
-</style>
+<img src={githubMark} alt="Github Mark" {...props} />

@@ -1,3 +1,4 @@
+import type FreemMark from "@/components/FreemMark.svelte";
 import type GithubMark from "@/components/GithubMark.svelte";
 import type { ComponentProps } from "svelte";
 
@@ -9,30 +10,33 @@ export interface Theme {
     readonly primary: string;
     readonly secondary: string;
   };
-  readonly githubMarkColor: ComponentProps<typeof GithubMark>["color"];
+  readonly freemMarkTheme: ComponentProps<typeof FreemMark>["theme"];
+  readonly githubMarkTheme: ComponentProps<typeof GithubMark>["theme"];
 }
 
 export namespace themes {
   export const light: Theme = {
-    primary: "#7e00fe",
+    primary: "#4287f5",
     background: "#ffffff",
     line: "#cccccc",
     text: {
       primary: "#212121",
       secondary: "#707070",
     },
-    githubMarkColor: "black",
+    freemMarkTheme: "dark",
+    githubMarkTheme: "dark",
   };
 
   export const dark: Theme = {
-    primary: "#7e00fe",
+    primary: "#4287f5",
     background: "#212121",
     line: "#545454",
     text: {
       primary: "#ffffff",
       secondary: "#b0b0b0",
     },
-    githubMarkColor: "white",
+    freemMarkTheme: "light",
+    githubMarkTheme: "light",
   };
 }
 
