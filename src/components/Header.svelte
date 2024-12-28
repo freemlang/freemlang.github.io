@@ -41,18 +41,18 @@
   .combination-mark {
     height: 100%;
     display: flex;
-    gap: 0.2em;
+    gap: 0.2rem;
     align-items: center;
     font-display: block;
 
     & > :global(.home-anchor) {
       display: flex;
       align-items: center;
-      gap: 0.5em;
+      gap: 0.5rem;
       height: 100%;
 
       & > :global(.freem-mark) {
-        height: 40px;
+        height: 2rem;
       }
     }
   }
